@@ -50,6 +50,9 @@ export const pagesPath = {
 export type PagesPath = typeof pagesPath
 
 // prettier-ignore
+export type RouteName = '.ignore' | 'a-b-c' | 'pid' | 'aaa-bbb' | 'aaa-bbb-ccc' | 'blog-slug'
+
+// prettier-ignore
 export const staticPath = {
   aa_json: '/aa.json',
   bb: {

@@ -4,22 +4,28 @@ import { createIg, isIgnored } from './isIgnored'
 import { parseQueryFromTS } from './parseQueryFromTS'
 import { replaceWithUnderscore } from './replaceWithUnderscore'
 
+const routeNames: string[] = []
+
 const createMethods = (
   indent: string,
   importName: string | undefined,
   pathname: string,
   trailingSlash: boolean,
   routeName: string
-) =>
-  `${indent}  $url: (url${importName?.startsWith('Query') ? '' : '?'}: { ${
-    importName ? `query${importName.startsWith('Optional') ? '?' : ''}: ${importName}, ` : ''
-  }hash?: string }) => ({ path: ${/\${/.test(pathname) ? '`' : "'"}${pathname}${
-    trailingSlash || pathname === '' ? '/' : ''
-  }${/\${/.test(pathname) ? '`' : "'"}${
-    importName ? `, query: url${importName.startsWith('Query') ? '' : '?'}.query as any` : ''
-  }, hash: url${importName?.startsWith('Query') ? '' : '?'}.hash }),` +
-  '\n' +
-  `${indent}  $name: () => \`${routeName}\``
+) => {
+  routeNames.push(routeName)
+  return (
+    `${indent}  $url: (url${importName?.startsWith('Query') ? '' : '?'}: { ${
+      importName ? `query${importName.startsWith('Optional') ? '?' : ''}: ${importName}, ` : ''
+    }hash?: string }) => ({ path: ${/\${/.test(pathname) ? '`' : "'"}${pathname}${
+      trailingSlash || pathname === '' ? '/' : ''
+    }${/\${/.test(pathname) ? '`' : "'"}${
+      importName ? `, query: url${importName.startsWith('Query') ? '' : '?'}.query as any` : ''
+    }, hash: url${importName?.startsWith('Query') ? '' : '?'}.hash }),` +
+    '\n' +
+    `${indent}  $name: () => \`${routeName}\``
+  )
+}
 
 const parseQueryFromVue = (file: string, suffix: number) => {
   const fileData = fs.readFileSync(file, 'utf8')
@@ -180,6 +186,9 @@ export default (
 ${importsText}${importsText && queriesText ? '\n' : ''}
 ${queriesText}${
     imports.length ? '\n' : ''
-  }export const pagesPath = ${text}\n\nexport type PagesPath = typeof pagesPath
+  }export const pagesPath = ${text}\n\nexport type PagesPath = typeof pagesPath\n\nexport type RouteName = ${routeNames
+    .filter(Boolean)
+    .map(it => `'${it}'`)
+    .join('\x20|\x20')}
 `
 }
