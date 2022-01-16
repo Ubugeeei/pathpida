@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/ubugeeei/pathpida/compare/v0.17.0...v1.1.0) (2022-01-16)
+
+
+### Features
+
+* export type of route name ([ef9847f](https://github.com/ubugeeei/pathpida/commit/ef9847f542a280c629e09aea2a8b15ba774d7aa9))
+* type safa nuxt route name ([b95767c](https://github.com/ubugeeei/pathpida/commit/b95767ce528653306baf30973c039124288252a1))
+
+
+### Bug Fixes
+
+* remove - from first unit of route name ([66857a1](https://github.com/ubugeeei/pathpida/commit/66857a11f8ca7bb8545a27b735d0a87106781542))
+
 ## [0.17.0](https://github.com/aspida/pathpida/compare/v0.16.0...v0.17.0) (2021-08-29)
 
 
