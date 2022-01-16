@@ -8,7 +8,8 @@ const createMethods = (
   indent: string,
   importName: string | undefined,
   pathname: string,
-  trailingSlash: boolean
+  trailingSlash: boolean,
+  routeName: string
 ) =>
   `${indent}  $url: (url${importName?.startsWith('Query') ? '' : '?'}: { ${
     importName ? `query${importName.startsWith('Optional') ? '?' : ''}: ${importName}, ` : ''
@@ -16,7 +17,9 @@ const createMethods = (
     trailingSlash || pathname === '' ? '/' : ''
   }${/\${/.test(pathname) ? '`' : "'"}${
     importName ? `, query: url${importName.startsWith('Query') ? '' : '?'}.query as any` : ''
-  }, hash: url${importName?.startsWith('Query') ? '' : '?'}.hash })`
+  }, hash: url${importName?.startsWith('Query') ? '' : '?'}.hash }),` +
+  '\n' +
+  `${indent}  $name: () => \`${routeName}\``
 
 const parseQueryFromVue = (file: string, suffix: number) => {
   const fileData = fs.readFileSync(file, 'utf8')
@@ -76,6 +79,7 @@ export default (
     importBasePath: string,
     indent: string,
     url: string,
+    routeName: string,
     text: string,
     methodsOfIndexTsFile?: string
   ) => {
@@ -96,6 +100,7 @@ export default (
         const basename = path.basename(file, path.extname(file))
         let valFn = `${indent}${replaceWithUnderscore(basename)}: {\n<% next %>\n${indent}}`
         let newUrl = `${url}/${basename}`
+        let newRouteName = `${routeName}-${basename}`
 
         if (basename.startsWith('_')) {
           const slug = basename.slice(1)
@@ -106,6 +111,8 @@ export default (
           newUrl = `${url}${
             isPassValNullable ? `\${${slug} !== undefined ? \`/\${${slug}}\` : ''}` : `/\${${slug}}`
           }`
+          newRouteName =
+            routeName[0] === '-' ? `${routeName.slice(1)}-${slug}` : `${routeName}-${slug}`
         }
 
         const target = path.posix.join(targetDir, file)
@@ -113,7 +120,7 @@ export default (
         if (fs.statSync(target).isFile() && basename !== 'index' && !arr.includes(basename)) {
           return valFn.replace(
             '<% next %>',
-            createMethods(indent, getImportName(target), newUrl, trailingSlash)
+            createMethods(indent, getImportName(target), newUrl, trailingSlash, newRouteName)
           )
         } else if (fs.statSync(target).isDirectory()) {
           const indexFile = fs
@@ -125,13 +132,15 @@ export default (
             `${importBasePath}/${file}`,
             indent,
             newUrl,
+            newRouteName,
             valFn.replace('<% next %>', '<% props %>'),
             indexFile &&
               createMethods(
                 indent,
                 getImportName(path.posix.join(target, indexFile)),
                 newUrl,
-                trailingSlash
+                trailingSlash,
+                newRouteName
               )
           )
         }
@@ -159,11 +168,12 @@ export default (
       rootIndent,
       getImportName(path.posix.join(input, rootIndexFile)),
       '',
-      trailingSlash
+      trailingSlash,
+      ''
     )
   }
 
-  const text = createPathObjString(input, '.', rootIndent, '', `{\n<% props %>\n}`, rootMethods)
+  const text = createPathObjString(input, '.', rootIndent, '', '', `{\n<% props %>\n}`, rootMethods)
   const importsText = imports.filter(i => i.startsWith('import')).join('\n')
   const queriesText = imports.filter(i => !i.startsWith('import')).join('\n')
 

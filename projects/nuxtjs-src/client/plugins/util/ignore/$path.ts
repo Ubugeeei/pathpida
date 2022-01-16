@@ -13,27 +13,33 @@ export const pagesPath = {
   _a: (a: string | number) => ({
     b: {
       _c: (c?: string | number) => ({
-        $url: (url?: { hash?: string }) => ({ path: `/${a}/b${c !== undefined ? `/${c}` : ''}/`, hash: url?.hash })
+        $url: (url?: { hash?: string }) => ({ path: `/${a}/b${c !== undefined ? `/${c}` : ''}/`, hash: url?.hash }),
+        $name: () => `a-b-c`
       })
     }
   }),
   _pid: (pid?: string | number) => ({
-    $url: (url?: { query?: OptionalQuery1, hash?: string }) => ({ path: `${pid !== undefined ? `/${pid}` : ''}/`, query: url?.query as any, hash: url?.hash })
+    $url: (url?: { query?: OptionalQuery1, hash?: string }) => ({ path: `${pid !== undefined ? `/${pid}` : ''}/`, query: url?.query as any, hash: url?.hash }),
+    $name: () => `-pid`
   }),
   aaa: {
     _bbb: (bbb: string | number) => ({
       ccc: {
-        $url: (url?: { hash?: string }) => ({ path: `/aaa/${bbb}/ccc/`, hash: url?.hash })
+        $url: (url?: { hash?: string }) => ({ path: `/aaa/${bbb}/ccc/`, hash: url?.hash }),
+        $name: () => `aaa-bbb-ccc`
       },
-      $url: (url?: { hash?: string }) => ({ path: `/aaa/${bbb}/`, hash: url?.hash })
+      $url: (url?: { hash?: string }) => ({ path: `/aaa/${bbb}/`, hash: url?.hash }),
+      $name: () => `aaa-bbb`
     })
   },
   blog: {
     _slug: (slug?: string | number) => ({
-      $url: (url: { query: Query2, hash?: string }) => ({ path: `/blog${slug !== undefined ? `/${slug}` : ''}/`, query: url.query as any, hash: url.hash })
+      $url: (url: { query: Query2, hash?: string }) => ({ path: `/blog${slug !== undefined ? `/${slug}` : ''}/`, query: url.query as any, hash: url.hash }),
+      $name: () => `blog-slug`
     })
   },
-  $url: (url: { query: Query0, hash?: string }) => ({ path: '/', query: url.query as any, hash: url.hash })
+  $url: (url: { query: Query0, hash?: string }) => ({ path: '/', query: url.query as any, hash: url.hash }),
+  $name: () => ``
 }
 
 // prettier-ignore

@@ -26,6 +26,8 @@ export default async (
   igPath: string | undefined,
   dir = process.cwd()
 ): Promise<Config> => {
+  // console.log(dir)
+
   const type = getFrameworkType(dir)
   const ignorePath = igPath && path.join(dir, igPath)
 
