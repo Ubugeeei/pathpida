@@ -100,7 +100,7 @@ export default (
         const basename = path.basename(file, path.extname(file))
         let valFn = `${indent}${replaceWithUnderscore(basename)}: {\n<% next %>\n${indent}}`
         let newUrl = `${url}/${basename}`
-        let newRouteName = `${routeName}-${basename}`
+        let newRouteName = routeName ? `${routeName}-${basename}` : basename
 
         if (basename.startsWith('_')) {
           const slug = basename.slice(1)
@@ -111,8 +111,7 @@ export default (
           newUrl = `${url}${
             isPassValNullable ? `\${${slug} !== undefined ? \`/\${${slug}}\` : ''}` : `/\${${slug}}`
           }`
-          newRouteName =
-            routeName[0] === '-' ? `${routeName.slice(1)}-${slug}` : `${routeName}-${slug}`
+          newRouteName = routeName ? `${routeName}-${slug}` : `${slug}`
         }
 
         const target = path.posix.join(targetDir, file)

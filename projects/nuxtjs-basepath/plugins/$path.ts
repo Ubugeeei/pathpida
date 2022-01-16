@@ -21,7 +21,7 @@ type Query2 = {
 export const pagesPath = {
   _ignore: {
     $url: (url?: { hash?: string }) => ({ path: '/.ignore/', hash: url?.hash }),
-    $name: () => `-.ignore`
+    $name: () => `.ignore`
   },
   _a: (a: string | number) => ({
     b: {
@@ -33,7 +33,7 @@ export const pagesPath = {
   }),
   _pid: (pid?: string | number) => ({
     $url: (url?: { query?: OptionalQuery1, hash?: string }) => ({ path: `${pid !== undefined ? `/${pid}` : ''}/`, query: url?.query as any, hash: url?.hash }),
-    $name: () => `-pid`
+    $name: () => `pid`
   }),
   aaa: {
     _bbb: (bbb: string | number) => ({

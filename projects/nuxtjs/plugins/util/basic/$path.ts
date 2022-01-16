@@ -21,7 +21,7 @@ export const pagesPath = {
   }),
   _pid: (pid?: string | number) => ({
     $url: (url?: { query?: OptionalQuery1, hash?: string }) => ({ path: `${pid !== undefined ? `/${pid}` : ''}/`, query: url?.query as any, hash: url?.hash }),
-    $name: () => `-pid`
+    $name: () => `pid`
   }),
   aaa: {
     _bbb: (bbb: string | number) => ({
