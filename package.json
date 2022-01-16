@@ -1,8 +1,8 @@
 {
-  "name": "pathpida",
-  "version": "0.17.0",
+  "name": "ubugeeei-pathpida",
+  "version": "1.0.0",
   "description": "TypeScript friendly pages path generator for Next.js, Nuxt.js and Sapper",
-  "author": "Solufa",
+  "author": "Solufa forked from Ubugeeei",
   "license": "MIT",
   "types": "dist/cli.d.ts",
   "bin": "bin/index.js",
@@ -19,13 +19,13 @@
     "test": "jest",
     "typecheck": "tsc --noEmit"
   },
-  "homepage": "https://github.com/aspida/pathpida#readme",
+  "homepage": "https://github.com/ubugeeei/pathpida#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aspida/pathpida.git"
+    "url": "git+https://github.com/ubugeeei/pathpida.git"
   },
   "bugs": {
-    "url": "https://github.com/aspida/pathpida/issues"
+    "url": "https://github.com/ubugeeei/pathpida/issues"
   },
   "files": [
     "dist"
