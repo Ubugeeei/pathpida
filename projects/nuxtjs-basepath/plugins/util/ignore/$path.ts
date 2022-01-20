@@ -55,7 +55,7 @@ export const pagesPath = {
 export type PagesPath = typeof pagesPath
 
 // prettier-ignore
-export type RouteName = 'a-b-c' | 'pid' | 'aaa-bbb' | 'aaa-bbb-ccc' | 'blog-slug'
+export type RouteName = '' | 'a-b-c' | 'pid' | 'aaa-bbb' | 'aaa-bbb-ccc' | 'blog-slug'
 
 // prettier-ignore
 export const staticPath = {

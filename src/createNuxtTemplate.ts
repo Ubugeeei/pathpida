@@ -187,7 +187,6 @@ ${importsText}${importsText && queriesText ? '\n' : ''}
 ${queriesText}${
     imports.length ? '\n' : ''
   }export const pagesPath = ${text}\n\nexport type PagesPath = typeof pagesPath\n\nexport type RouteName = ${routeNames
-    .filter(Boolean)
     .map(it => `'${it}'`)
     .join('\x20|\x20')}
 `
