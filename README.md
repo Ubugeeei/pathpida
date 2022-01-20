@@ -1,4 +1,5 @@
 # pathpida (forked by ubugeeei)
+ \- Nuxt Route Type Implementation -
 
 <br />
 <img src="https://aspida.github.io/pathpida/logos/png/logo.png" alt="pathpida" title="pathpida" />
