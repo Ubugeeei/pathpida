@@ -23,7 +23,7 @@ const createMethods = (
       importName ? `, query: url${importName.startsWith('Query') ? '' : '?'}.query as any` : ''
     }, hash: url${importName?.startsWith('Query') ? '' : '?'}.hash }),` +
     '\n' +
-    `${indent}  $name: () => \`${routeName}\``
+    `${indent}  $name: (): RouteName => \`${routeName}\``
   )
 }
 
@@ -106,7 +106,7 @@ export default (
         const basename = path.basename(file, path.extname(file))
         let valFn = `${indent}${replaceWithUnderscore(basename)}: {\n<% next %>\n${indent}}`
         let newUrl = `${url}/${basename}`
-        let newRouteName = routeName ? `${routeName}-${basename}` : basename
+        let newRouteName = routeName ? `${routeName}-${basename}` : basename // 追加した
 
         if (basename.startsWith('_')) {
           const slug = basename.slice(1)
@@ -117,7 +117,7 @@ export default (
           newUrl = `${url}${
             isPassValNullable ? `\${${slug} !== undefined ? \`/\${${slug}}\` : ''}` : `/\${${slug}}`
           }`
-          newRouteName = routeName ? `${routeName}-${slug}` : `${slug}`
+          newRouteName = routeName ? `${routeName}-${slug}` : `${slug}` // 追加した
         }
 
         const target = path.posix.join(targetDir, file)
@@ -125,7 +125,7 @@ export default (
         if (fs.statSync(target).isFile() && basename !== 'index' && !arr.includes(basename)) {
           return valFn.replace(
             '<% next %>',
-            createMethods(indent, getImportName(target), newUrl, trailingSlash, newRouteName)
+            createMethods(indent, getImportName(target), newUrl, trailingSlash, newRouteName) // 渡す
           )
         } else if (fs.statSync(target).isDirectory()) {
           const indexFile = fs
@@ -137,7 +137,7 @@ export default (
             `${importBasePath}/${file}`,
             indent,
             newUrl,
-            newRouteName,
+            newRouteName, // 渡す
             valFn.replace('<% next %>', '<% props %>'),
             indexFile &&
               createMethods(
@@ -145,7 +145,7 @@ export default (
                 getImportName(path.posix.join(target, indexFile)),
                 newUrl,
                 trailingSlash,
-                newRouteName
+                newRouteName // 渡す
               )
           )
         }
