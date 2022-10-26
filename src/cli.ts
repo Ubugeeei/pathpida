@@ -7,7 +7,7 @@ import write from './writeRouteFile'
 export const run = async (args: string[]) => {
   const argv = minimist(args, {
     string: ['version', 'watch', 'enableStatic', 'output', 'ignorePath', 'pages'],
-    alias: { v: 'version', w: 'watch', s: 'enableStatic', o: 'output', p: 'ignorePath' }
+    alias: { v: 'version', w: 'watch', s: 'enableStatic', o: 'output', p: 'ignorePath', g: 'pages' }
   })
 
   argv.version !== undefined
