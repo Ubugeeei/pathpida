@@ -24,6 +24,7 @@ export default async (
   enableStatic: boolean,
   output: string | undefined,
   igPath: string | undefined,
+  pagesDir = 'pages',
   dir = process.cwd()
 ): Promise<Config> => {
   // console.log(dir)
@@ -48,7 +49,7 @@ export default async (
       )
     }
 
-    const srcDir = fs.existsSync(path.posix.join(dir, 'pages')) ? dir : path.posix.join(dir, 'src')
+    const srcDir = fs.existsSync(path.posix.join(dir, pagesDir)) ? dir : path.posix.join(dir, 'src')
 
     if (!output) {
       const utilsPath = path.join(srcDir, 'utils')
@@ -59,7 +60,7 @@ export default async (
 
     return {
       type,
-      input: path.posix.join(srcDir, 'pages'),
+      input: path.posix.join(srcDir, pagesDir),
       staticDir: enableStatic ? path.posix.join(dir, 'public') : undefined,
       output,
       ignorePath,
@@ -80,7 +81,7 @@ export default async (
 
     return {
       type,
-      input: path.posix.join(srcDir, 'pages'),
+      input: path.posix.join(srcDir, pagesDir),
       staticDir: enableStatic ? path.posix.join(srcDir, 'static') : undefined,
       output,
       ignorePath,

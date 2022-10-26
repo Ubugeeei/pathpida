@@ -1,5 +1,6 @@
 # pathpida (forked by ubugeeei)
- \- Nuxt Route Type Implementation -
+
+\- Nuxt Route Type Implementation -
 
 <br />
 <img src="https://aspida.github.io/pathpida/logos/png/logo.png" alt="pathpida" title="pathpida" />
@@ -142,6 +143,28 @@ export default Vue.extend({
 })
 </script>
 ```
+
+## Options
+
+extends: [pathpida#command-line-interface-options](https://github.com/aspida/pathpida#command-line-interface-options)
+
+<table>
+  <thead>
+    <tr>
+      <th>Option</th>
+      <th>Type</th>
+      <th width="100%">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td nowrap><code>--pages</code><br /></td>
+      <td></td>
+      <td>Source pages dir path. default: <code>pages</code></td>
+    </tr>
+    
+  </tbody>
+</table>
 
 ## License
 

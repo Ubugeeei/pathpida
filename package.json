@@ -1,6 +1,6 @@
 {
   "name": "ubugeeei-pathpida",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "TypeScript friendly pages path generator for Next.js, Nuxt.js and Sapper",
   "author": "Solufa forked by Ubugeeei",
   "license": "MIT",

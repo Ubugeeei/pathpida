@@ -6,7 +6,7 @@ import write from './writeRouteFile'
 
 export const run = async (args: string[]) => {
   const argv = minimist(args, {
-    string: ['version', 'watch', 'enableStatic', 'output', 'ignorePath'],
+    string: ['version', 'watch', 'enableStatic', 'output', 'ignorePath', 'pages'],
     alias: { v: 'version', w: 'watch', s: 'enableStatic', o: 'output', p: 'ignorePath' }
   })
 
@@ -17,11 +17,16 @@ export const run = async (args: string[]) => {
         const config = await getConfig(
           argv.enableStatic !== undefined,
           argv.output,
-          argv.ignorePath
+          argv.ignorePath,
+          argv.pages
         )
         write(build(config))
         watch(config.input, () => write(build(config, 'pages')))
         config.staticDir && watch(config.staticDir, () => write(build(config, 'static')))
       })()
-    : write(build(await getConfig(argv.enableStatic !== undefined, argv.output, argv.ignorePath)))
+    : write(
+        build(
+          await getConfig(argv.enableStatic !== undefined, argv.output, argv.ignorePath, argv.pages)
+        )
+      )
 }
