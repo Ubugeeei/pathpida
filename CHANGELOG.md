@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.6](https://github.com/ubugeeei/pathpida/compare/v0.17.0...v1.2.6) (2022-10-26)
+
+
+### Features
+
+* export type of route name ([ef9847f](https://github.com/ubugeeei/pathpida/commit/ef9847f542a280c629e09aea2a8b15ba774d7aa9))
+* input pages source path by cli options ([5e6543f](https://github.com/ubugeeei/pathpida/commit/5e6543fe62a01dce1b3a8e1502bcb4a1c2a08a3b))
+* type anotation of route name methods ([0025a99](https://github.com/ubugeeei/pathpida/commit/0025a99399f02c563d936fbbf6601fbb897b714c))
+* type anotation of route name methods ([714d9b8](https://github.com/ubugeeei/pathpida/commit/714d9b810f37bd2cb4d441897a7faa201affe52d))
+* type safa nuxt route name ([b95767c](https://github.com/ubugeeei/pathpida/commit/b95767ce528653306baf30973c039124288252a1))
+
+
+### Bug Fixes
+
+* remove - from first unit of route name ([66857a1](https://github.com/ubugeeei/pathpida/commit/66857a11f8ca7bb8545a27b735d0a87106781542))
+
+
+### Tests
+
+* test custom pages path ([5afe20d](https://github.com/ubugeeei/pathpida/commit/5afe20db07a80a9a609fa90d038d88da7a97bed9))
+
 ### [1.2.5](https://github.com/ubugeeei/pathpida/compare/v0.17.0...v1.2.5) (2022-10-26)
 
 
