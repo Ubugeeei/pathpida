@@ -21,7 +21,7 @@ export const run = async (args: string[]) => {
           argv.pages
         )
         write(build(config))
-        watch(config.input, () => write(build(config, 'pages')))
+        watch(config.input, () => write(build(config, argv.pages)))
         config.staticDir && watch(config.staticDir, () => write(build(config, 'static')))
       })()
     : write(
