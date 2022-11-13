@@ -17,11 +17,11 @@ const createMethods = (
   return (
     `${indent}  $url: (url${importName?.startsWith('Query') ? '' : '?'}: { ${
       importName ? `query${importName.startsWith('Optional') ? '?' : ''}: ${importName}, ` : ''
-    }hash?: string }) => ({ path: ${/\${/.test(pathname) ? '`' : "'"}${pathname}${
-      trailingSlash || pathname === '' ? '/' : ''
-    }${/\${/.test(pathname) ? '`' : "'"}${
+    }hash?: string }, append?: boolean, replace?: boolean) => ({ path: ${
+      /\${/.test(pathname) ? '`' : "'"
+    }${pathname}${trailingSlash || pathname === '' ? '/' : ''}${/\${/.test(pathname) ? '`' : "'"}${
       importName ? `, query: url${importName.startsWith('Query') ? '' : '?'}.query as any` : ''
-    }, hash: url${importName?.startsWith('Query') ? '' : '?'}.hash }),` +
+    }, hash: url${importName?.startsWith('Query') ? '' : '?'}.hash, append, replace }),` +
     '\n' +
     `${indent}  $name: (): RouteName => \`${routeName}\``
   )
