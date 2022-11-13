@@ -14,17 +14,26 @@ const createMethods = (
   routeName: string
 ) => {
   routeNames.push(routeName)
-  return (
-    `${indent}  $url: (url${importName?.startsWith('Query') ? '' : '?'}: { ${
-      importName ? `query${importName.startsWith('Optional') ? '?' : ''}: ${importName}, ` : ''
-    }hash?: string }, append?: boolean, replace?: boolean) => ({ path: ${
-      /\${/.test(pathname) ? '`' : "'"
-    }${pathname}${trailingSlash || pathname === '' ? '/' : ''}${/\${/.test(pathname) ? '`' : "'"}${
-      importName ? `, query: url${importName.startsWith('Query') ? '' : '?'}.query as any` : ''
-    }, hash: url${importName?.startsWith('Query') ? '' : '?'}.hash, append, replace }),` +
-    '\n' +
-    `${indent}  $name: (): RouteName => \`${routeName}\``
-  )
+
+  const urlParamTemplate = `url${importName?.startsWith('Query') ? '' : '?'}: { ${
+    importName ? `query${importName.startsWith('Optional') ? '?' : ''}: ${importName}, ` : ''
+  }hash?: string }`
+
+  const urlPathTemplate = `path: ${/\${/.test(pathname) ? '`' : "'"}${pathname}${
+    trailingSlash || pathname === '' ? '/' : ''
+  }${/\${/.test(pathname) ? '`' : "'"}`
+
+  const queryTemplate = importName
+    ? `, query: url${importName.startsWith('Query') ? '' : '?'}.query as any`
+    : ''
+
+  const hashTemplate = `hash: url${importName?.startsWith('Query') ? '' : '?'}.hash`
+
+  const urlTemplate = `$url: (${urlParamTemplate}, append?: boolean, replace?: boolean) => ({${urlPathTemplate}, ${hashTemplate}${queryTemplate}, append, replace }),`
+
+  const routNameTemplate = `$name: (): RouteName => '${routeName}'`
+
+  return `${indent}\x20\x20${urlTemplate}\n${indent}\x20\x20${routNameTemplate}`
 }
 
 const parseQueryFromVue = (file: string, suffix: number) => {

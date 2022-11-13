@@ -13,33 +13,33 @@ export const pagesPath = {
   _a: (a: string | number) => ({
     b: {
       _c: (c?: string | number) => ({
-        $url: (url?: { hash?: string }, append?: boolean, replace?: boolean) => ({ path: `/${a}/b${c !== undefined ? `/${c}` : ''}/`, hash: url?.hash, append, replace }),
-        $name: (): RouteName => `a-b-c`
+        $url: (url?: { hash?: string }, append?: boolean, replace?: boolean) => ({path: `/${a}/b${c !== undefined ? `/${c}` : ''}/`, hash: url?.hash, append, replace }),
+        $name: (): RouteName => 'a-b-c'
       })
     }
   }),
   _pid: (pid?: string | number) => ({
-    $url: (url?: { query?: OptionalQuery1, hash?: string }, append?: boolean, replace?: boolean) => ({ path: `${pid !== undefined ? `/${pid}` : ''}/`, query: url?.query as any, hash: url?.hash, append, replace }),
-    $name: (): RouteName => `pid`
+    $url: (url?: { query?: OptionalQuery1, hash?: string }, append?: boolean, replace?: boolean) => ({path: `${pid !== undefined ? `/${pid}` : ''}/`, hash: url?.hash, query: url?.query as any, append, replace }),
+    $name: (): RouteName => 'pid'
   }),
   aaa: {
     _bbb: (bbb: string | number) => ({
       ccc: {
-        $url: (url?: { hash?: string }, append?: boolean, replace?: boolean) => ({ path: `/aaa/${bbb}/ccc/`, hash: url?.hash, append, replace }),
-        $name: (): RouteName => `aaa-bbb-ccc`
+        $url: (url?: { hash?: string }, append?: boolean, replace?: boolean) => ({path: `/aaa/${bbb}/ccc/`, hash: url?.hash, append, replace }),
+        $name: (): RouteName => 'aaa-bbb-ccc'
       },
-      $url: (url?: { hash?: string }, append?: boolean, replace?: boolean) => ({ path: `/aaa/${bbb}/`, hash: url?.hash, append, replace }),
-      $name: (): RouteName => `aaa-bbb`
+      $url: (url?: { hash?: string }, append?: boolean, replace?: boolean) => ({path: `/aaa/${bbb}/`, hash: url?.hash, append, replace }),
+      $name: (): RouteName => 'aaa-bbb'
     })
   },
   blog: {
     _slug: (slug?: string | number) => ({
-      $url: (url: { query: Query2, hash?: string }, append?: boolean, replace?: boolean) => ({ path: `/blog${slug !== undefined ? `/${slug}` : ''}/`, query: url.query as any, hash: url.hash, append, replace }),
-      $name: (): RouteName => `blog-slug`
+      $url: (url: { query: Query2, hash?: string }, append?: boolean, replace?: boolean) => ({path: `/blog${slug !== undefined ? `/${slug}` : ''}/`, hash: url.hash, query: url.query as any, append, replace }),
+      $name: (): RouteName => 'blog-slug'
     })
   },
-  $url: (url: { query: Query0, hash?: string }, append?: boolean, replace?: boolean) => ({ path: '/', query: url.query as any, hash: url.hash, append, replace }),
-  $name: (): RouteName => ``
+  $url: (url: { query: Query0, hash?: string }, append?: boolean, replace?: boolean) => ({path: '/', hash: url.hash, query: url.query as any, append, replace }),
+  $name: (): RouteName => ''
 }
 
 // prettier-ignore
